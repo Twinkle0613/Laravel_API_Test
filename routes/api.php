@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 // });
 
 Route::post('register', 'AuthController@register');
-Route::get('getToken', 'AuthController@login');
+Route::post('getToken', 'AuthController@getToken');
 
 Route::group([
     'prefix' => 'v1',

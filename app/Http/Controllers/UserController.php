@@ -138,7 +138,7 @@ class UserController extends Controller
                                     User::create($data);
                                 break;
                                 case 'update':
-                                    Validator::make($data, User::getRules($data['method'],$data['id']));
+                                    $validation = Validator::make($data, User::getRules($data['method'],$data['id']));
                                     if (!$validation->fails()) {
                                         $user = User::find($data['id']);
                                         if(isset($data['password'])){

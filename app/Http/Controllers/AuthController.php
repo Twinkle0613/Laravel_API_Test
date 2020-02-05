@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Validator;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -22,10 +23,14 @@ class AuthController extends Controller
     }
 
 
-    public function login(Request $request){
+    public function getToken(Request $request){
 
-        $loginData = $request->all();
-        if(!auth()->attempt($loginData)){
+        $validatedData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+
+        if(!auth()->attempt($validatedData)){
             return response(['message'=>'Invalid credentials']);
         }
         $user = auth()->user();
